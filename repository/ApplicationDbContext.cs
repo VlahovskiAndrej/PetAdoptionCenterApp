@@ -19,6 +19,8 @@ namespace repository
         public DbSet<Order> Order { get; set; } = default!;
         public DbSet<ProductInOrder> ProductInOrder { get; set; } = default!;
         public DbSet<Probaa> Probaa { get; set; } = default!;
+        public DbSet<Pet> Pet { get; set; } = default!;
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

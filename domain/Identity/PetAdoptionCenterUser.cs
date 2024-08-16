@@ -1,6 +1,7 @@
 ﻿
 using domain.Models;
 using PetAdoptionCenter.Domain.Identity;
+using PetAdoptionCenter.Domain.Models;
 
 
 
@@ -14,6 +15,7 @@ namespace domain.Identity
         public ShoppingCart? UserCart { get; set; }
         /*public Role? Role { get; set; }*/
 
+        public virtual ICollection<Pet>? Pets { get; set; }
 
     }
 }

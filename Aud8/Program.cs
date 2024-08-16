@@ -2,6 +2,10 @@
 using domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PetAdoptionCenter.Repository.implementation;
+using PetAdoptionCenter.Repository.Interface;
+using PetAdoptionCenter.Service.implementation;
+using PetAdoptionCenter.Service.Interface;
 using repository;
 using repository.implementation;
 using repository.Interface;
@@ -24,10 +28,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
+builder.Services.AddScoped(typeof(IPetRepository), typeof(PetRepository));
 
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IPetService, PetService>();
 
 
 

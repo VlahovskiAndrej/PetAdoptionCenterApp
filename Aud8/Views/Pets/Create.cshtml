@@ -1,0 +1,85 @@
+﻿@model PetAdoptionCenter.Domain.Models.Pet
+
+@{
+    ViewData["Title"] = "Create";
+    var loggedShelterId = ViewData["LoggedShelterId"] as string;
+}
+
+<h1>Create</h1>
+
+<h4>Pet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetType" class="control-label"></label>
+                <input asp-for="PetType" class="form-control" />
+                <span asp-validation-for="PetType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Breed" class="control-label"></label>
+                <input asp-for="Breed" class="form-control" />
+                <span asp-validation-for="Breed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sex" class="control-label"></label>
+                <input asp-for="Sex" class="form-control" />
+                <span asp-validation-for="Sex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsHouseTrained" /> @Html.DisplayNameFor(model => model.IsHouseTrained)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteThings" class="control-label"></label>
+                <input asp-for="FavouriteThings" class="form-control" />
+                <span asp-validation-for="FavouriteThings" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeRequirements" class="control-label"></label>
+                <input asp-for="HomeRequirements" class="form-control" />
+                <span asp-validation-for="HomeRequirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoUrl" class="control-label"></label>
+                <input asp-for="PhotoUrl" class="form-control" />
+                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+            </div>
+            
+            <@* div class="form-group">
+                <label asp-for="ShelterId" class="control-label"></label>
+                <select asp-for="ShelterId" class ="form-control" asp-items="ViewBag.ShelterId"></select>
+            </div> *@
+            @* <input type="hidden" asp-asp-for="ShelterId" value="loggedShelterId" /> *@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
