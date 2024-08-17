@@ -28,7 +28,27 @@ namespace PetAdoptionCenter.Service.implementation
             _petService = petService;
         }
 
-        
+        public void AcceptAdoptionApplication(Guid? id)
+        {
+           var acceptedApplication = _adoptionApplicationRepoInclude.GetAdoptionApplicationById(id);
+           acceptedApplication.AdoptionApplicationStatus = Domain.enums.AdoptionApplicationStatus.APPROVED;
+           _adoptionApplicationRepository.Update(acceptedApplication);
+
+            var apps = _adoptionApplicationRepoInclude.GetAdoptionApplicationByPetId(acceptedApplication.PetId);
+
+            foreach (var app in apps)
+            {
+                if(app.Id != id)
+                {
+                    app.AdoptionApplicationStatus = Domain.enums.AdoptionApplicationStatus.REJECTED;
+                    _adoptionApplicationRepository.Update(app);
+                }
+            }
+
+            var petId = acceptedApplication.PetId;
+            _petService.ChangePetStatus(petId);
+
+        }
 
         public AdoptionApplication Apply(string loggedInUser, AdoptionApplication adoptionApplication)
         {

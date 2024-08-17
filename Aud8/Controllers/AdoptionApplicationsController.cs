@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,7 @@ namespace PetAdoptionCenter.Web.Controllers
         }
 
         // GET: AdoptionApplications/Create
+        [Authorize(Roles = "Adopter")]
         public IActionResult Create()
         {
             ViewData["AdopterId"] = new SelectList(_userRepository.GetAll(), "Id", "Id");
@@ -73,7 +75,7 @@ namespace PetAdoptionCenter.Web.Controllers
             if (ModelState.IsValid)
             {
                 _adoptionApplicationService.CreateApplicationForm(adoptionApplication);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyApplications));
             }
             ViewData["AdopterId"] = new SelectList(_userRepository.GetAll(), "Id", "Id");
             ViewData["PetId"] = new SelectList(_petService.GetPets(), "Id", "Id");
@@ -82,6 +84,7 @@ namespace PetAdoptionCenter.Web.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Adopter")]
         public IActionResult Apply(Guid? petId)
         {
             //ViewBag.petId = petId;
@@ -103,7 +106,7 @@ namespace PetAdoptionCenter.Web.Controllers
             {
                 var loggedInUser = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
                 _adoptionApplicationService.Apply(loggedInUser, adoptionApplication);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Pets");
             }
             
             return View(adoptionApplication);
@@ -115,6 +118,19 @@ namespace PetAdoptionCenter.Web.Controllers
             return View(_adoptionApplicationService.GetAdoptionApplicationsByAdopterId(id));
         }
 
+        [Authorize(Roles = "Shelter")]
+        public IActionResult Applications(Guid? petId)
+        {
+            return View(_adoptionApplicationService.GetAdoptionApplicationsByPetId(petId));
+        }
+
+        [HttpGet]
+        public IActionResult Accept(Guid? id)
+        {
+            var appForm = _adoptionApplicationService.GetAdoptionApplicationById(id);
+            _adoptionApplicationService.AcceptAdoptionApplication(id);
+            return RedirectToAction("Applications", new {petId = appForm.PetId});
+        }
 
 
 
@@ -160,7 +176,7 @@ namespace PetAdoptionCenter.Web.Controllers
                 {
                     throw;
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MyApplications", new {id = adoptionApplication.AdopterId});
             }
            
             return View(adoptionApplication);
@@ -195,7 +211,7 @@ namespace PetAdoptionCenter.Web.Controllers
             }
 
            
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("MyApplications", new {id = adoptionApplication.AdopterId});
         }
 
        /* private bool AdoptionApplicationExists(Guid id)

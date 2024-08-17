@@ -11,6 +11,7 @@ namespace PetAdoptionCenter.Repository.Interface
     public interface IPetRepository
     {
         List<Pet> GetAllPets();
+        List<Pet> GetPetsByShelterId(string? shelterId);
         public Pet GetPetById(Guid? id);
         
     }

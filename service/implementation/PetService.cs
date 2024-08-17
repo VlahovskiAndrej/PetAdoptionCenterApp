@@ -25,6 +25,13 @@ namespace PetAdoptionCenter.Service.implementation
             _userRepository = userRepository;
         }
 
+        public void ChangePetStatus(Guid? id)
+        {
+            var pet = _petRepoInclude.GetPetById(id);
+            pet.PetStatus = Domain.enums.PetStatus.ADOPTED;
+            _petRepository.Update(pet);
+        }
+
         public Pet CreateNewPet(string loggedInUser, Pet pet)
         {
             var loggedShelter = _userRepository.Get(loggedInUser);
@@ -48,6 +55,11 @@ namespace PetAdoptionCenter.Service.implementation
         public List<Pet> GetPets()
         {
             return _petRepoInclude.GetAllPets();
+        }
+
+        public List<Pet> GetPetsByShelterId(string? shelterId)
+        {
+            return _petRepoInclude.GetPetsByShelterId(shelterId);
         }
 
         public Pet UpdatePet(Pet pet)

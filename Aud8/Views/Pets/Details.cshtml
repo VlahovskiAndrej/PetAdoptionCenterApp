@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Details";
     var AppForms = ViewData["AppForms"] as List<AdoptionApplication>;
+    var loggedInUser = ViewData["LoggedInUser"] as domain.Identity.PetAdoptionCenterUser;
 }
 
 <h1>Details</h1>
@@ -87,9 +88,15 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-controller="AdoptionApplications" asp-action="Apply" asp-route-petId="@Model?.Id">Apply to Adopt</a> |
+    @if (User.IsInRole("Adopter") && Model.PetStatus == PetAdoptionCenter.Domain.enums.PetStatus.AVAILABLE_FOR_ADOPTION)
+    {
+        <a asp-controller="AdoptionApplications" asp-action="Apply" asp-route-petId="@Model?.Id" class="btn btn-success">Apply to Adopt</a>
+    }
+    
     <a asp-action="Index">Back to List</a>
+
+
+       @* to do so viewbag user *@
 </div>
 
 

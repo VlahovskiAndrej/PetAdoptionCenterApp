@@ -1,10 +1,5 @@
-﻿@model IEnumerable<PetAdoptionCenter.Domain.Models.AdoptionApplication>
-
-@{
-    ViewData["Title"] = "MyApplications";
-}
-
-<h1>My Applications</h1>
+﻿@using PetAdoptionCenter.Domain.enums
+@model IEnumerable<PetAdoptionCenter.Domain.Models.AdoptionApplication>
 
 
 <table class="table">
@@ -96,13 +91,13 @@
                     @Html.DisplayFor(modelItem => item.Question10)
                 </td>
                 <td>
-                    @if(item.AdoptionApplicationStatus == PetAdoptionCenter.Domain.enums.AdoptionApplicationStatus.PENDING)
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                    @if (item.Pet.PetStatus == PetStatus.ADOPTED)
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Edit</a>
+                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success disabled">Accept</a>
+                    }else{
+                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success">Accept</a>
                     }
-
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-light">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     
                 </td>
             </tr>

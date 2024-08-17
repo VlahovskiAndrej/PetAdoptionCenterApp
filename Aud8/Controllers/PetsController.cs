@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using domain.Identity;
 using domain.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,14 +21,18 @@ namespace PetAdoptionCenter.Web.Controllers
     {
         private readonly IPetService _petService;
         private readonly IAdoptionApplicationService _adoptionApplicationService;
+        private readonly UserManager<PetAdoptionCenterUser> _userManager;
 
-        public PetsController(IPetService petService, IAdoptionApplicationService adoptionApplicationService)
+
+        public PetsController(IPetService petService, IAdoptionApplicationService adoptionApplicationService, UserManager<PetAdoptionCenterUser> userManager)
         {
             _petService = petService;
             _adoptionApplicationService = adoptionApplicationService;
+            _userManager = userManager;
         }
 
         // GET: Pets
+        [Authorize(Roles = "Shelter,Adopter")]
         public IActionResult Index()
         {
             
@@ -33,6 +40,7 @@ namespace PetAdoptionCenter.Web.Controllers
         }
 
         // GET: Pets/Details/5
+        [Authorize(Roles = "Shelter,Adopter")]
         public IActionResult Details(Guid? id)
         {
             if (id == null)
@@ -48,10 +56,24 @@ namespace PetAdoptionCenter.Web.Controllers
 
             ViewData["AppForms"] = _adoptionApplicationService.GetAdoptionApplicationsByPetId(pet.Id);
 
+            /*var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = _userManager.FindByIdAsync(userId);
+            
+            ViewData["LoggedInUser"] = user;*/
+
             return View(pet);
         }
 
+
+        [Authorize(Roles = "Shelter")]
+        public IActionResult MyPets(string? id)
+        {
+            return View(_petService.GetPetsByShelterId(id));
+        }
+
         // GET: Pets/Create
+        [Authorize(Roles = "Shelter")]
         public IActionResult Create()
         {
             //ViewData["LoggedShelterId"] = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
@@ -76,7 +98,7 @@ namespace PetAdoptionCenter.Web.Controllers
             {
                 var loggedInUser = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
                 _petService.CreateNewPet(loggedInUser, pet);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MyPets", new { id = pet.ShelterId });
             }
             
             
@@ -85,6 +107,7 @@ namespace PetAdoptionCenter.Web.Controllers
         }
 
         // GET: Pets/Edit/5
+        [Authorize(Roles = "Shelter")]
         public IActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -123,7 +146,7 @@ namespace PetAdoptionCenter.Web.Controllers
                 {
                     throw;
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MyPets", new { id = pet.ShelterId });
             }
             //ViewData["ShelterId"] = new SelectList(_context.Users, "Id", "Id", pet.ShelterId);
             return View(pet);
@@ -157,7 +180,7 @@ namespace PetAdoptionCenter.Web.Controllers
                 _petService.DeletePet(pet.Id);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("MyPets", new { id = pet.ShelterId });
         }
 
         /*private bool PetExists(Guid id)

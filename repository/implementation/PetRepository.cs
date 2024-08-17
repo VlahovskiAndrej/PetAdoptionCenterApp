@@ -38,5 +38,13 @@ namespace PetAdoptionCenter.Repository.implementation
 
             return tmp;
         }
+
+        public List<Pet> GetPetsByShelterId(string? shelterId)
+        {
+            return entities
+                .Include(z => z.Shelter)
+                .Where(x => x.ShelterId.Equals(shelterId))
+                .ToList();
+        }
     }
 }

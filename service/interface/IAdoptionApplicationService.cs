@@ -17,5 +17,6 @@ namespace PetAdoptionCenter.Service.Interface
         public AdoptionApplication DeleteAdoptionApplication(Guid id);
         public List<AdoptionApplication> GetAdoptionApplicationsByPetId(Guid? petId);
         public List<AdoptionApplication> GetAdoptionApplicationsByAdopterId(string? adopterId);
+        public void AcceptAdoptionApplication(Guid? id);
     }
 }
