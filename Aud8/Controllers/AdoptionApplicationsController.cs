@@ -110,6 +110,15 @@ namespace PetAdoptionCenter.Web.Controllers
         }
 
 
+        public IActionResult MyApplications(string? id)
+        {
+            return View(_adoptionApplicationService.GetAdoptionApplicationsByAdopterId(id));
+        }
+
+
+
+
+
 
         // GET: AdoptionApplications/Edit/5
         public IActionResult Edit(Guid? id)

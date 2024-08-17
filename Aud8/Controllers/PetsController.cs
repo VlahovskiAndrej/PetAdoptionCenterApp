@@ -7,6 +7,7 @@ using domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PetAdoptionCenter.Domain.enums;
 using PetAdoptionCenter.Domain.Models;
 using PetAdoptionCenter.Service.Interface;
 using repository;
@@ -16,10 +17,12 @@ namespace PetAdoptionCenter.Web.Controllers
     public class PetsController : Controller
     {
         private readonly IPetService _petService;
+        private readonly IAdoptionApplicationService _adoptionApplicationService;
 
-        public PetsController(IPetService petService)
+        public PetsController(IPetService petService, IAdoptionApplicationService adoptionApplicationService)
         {
             _petService = petService;
+            _adoptionApplicationService = adoptionApplicationService;
         }
 
         // GET: Pets
@@ -43,13 +46,21 @@ namespace PetAdoptionCenter.Web.Controllers
                 return NotFound();
             }
 
+            ViewData["AppForms"] = _adoptionApplicationService.GetAdoptionApplicationsByPetId(pet.Id);
+
             return View(pet);
         }
 
         // GET: Pets/Create
         public IActionResult Create()
         {
-            ViewData["LoggedShelterId"] = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+            //ViewData["LoggedShelterId"] = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+
+            ViewData["PetType"] = new SelectList(
+                                        Enum.GetValues(typeof(PetType))
+                                        .Cast<PetType>()
+                                        .Select(e => new { Id = (int)e, Name = e.ToString() }),
+                                        "Id", "Name");
 
             return View();
         }

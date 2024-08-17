@@ -1,7 +1,9 @@
-﻿@model PetAdoptionCenter.Domain.Models.Pet
+﻿@using PetAdoptionCenter.Domain.Models
+@model PetAdoptionCenter.Domain.Models.Pet
 
 @{
     ViewData["Title"] = "Details";
+    var AppForms = ViewData["AppForms"] as List<AdoptionApplication>;
 }
 
 <h1>Details</h1>
@@ -89,3 +91,105 @@
     <a asp-controller="AdoptionApplications" asp-action="Apply" asp-route-petId="@Model?.Id">Apply to Adopt</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<br />
+<hr />
+<br />
+
+
+<h1>Applications</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Adoption Application Status
+            </th>
+            <th>
+                Adopter
+            </th>
+            <th>
+                Pet
+            </th>
+            <th>
+                Q1
+            </th>
+            <th>
+                Q2
+            </th>
+            <th>
+                Q3
+            </th>
+            <th>
+                Q4
+            </th>
+            <th>
+                Q5
+            </th>
+            <th>
+                Q6
+            </th>
+            <th>
+                Q7
+            </th>
+            <th>
+                Q8
+            </th>
+            <th>
+                Q9
+            </th>
+            <th>
+                Q10
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in AppForms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdoptionApplicationStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adopter.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pet.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question9)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question10)
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

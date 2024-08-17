@@ -23,11 +23,18 @@
                 <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
+             @* <div class="form-group">
+                 <label asp-for="PetType" class="control-label"></label>
+                 <input asp-for="PetType" class="form-control" />
+                 <span asp-validation-for="PetType" class="text-danger"></span>
+             </div> *@
+
             <div class="form-group">
                 <label asp-for="PetType" class="control-label"></label>
-                <input asp-for="PetType" class="form-control" />
+                <select asp-for="PetType" class="form-control" asp-items="ViewBag.PetType"></select>
                 <span asp-validation-for="PetType" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Breed" class="control-label"></label>
                 <input asp-for="Breed" class="form-control" />
