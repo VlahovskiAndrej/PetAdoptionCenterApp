@@ -20,6 +20,7 @@ namespace repository
         public DbSet<ProductInOrder> ProductInOrder { get; set; } = default!;
         public DbSet<Probaa> Probaa { get; set; } = default!;
         public DbSet<Pet> Pet { get; set; } = default!;
+        public DbSet<AdoptionApplication> AdoptionApplication { get; set; } = default!;
 
 
 

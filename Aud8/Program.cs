@@ -29,11 +29,13 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 builder.Services.AddScoped(typeof(IPetRepository), typeof(PetRepository));
+builder.Services.AddScoped(typeof(IAdoptionApplicationRepository), typeof(AdoptionApplicationRepository));
 
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IPetService, PetService>();
+builder.Services.AddTransient<IAdoptionApplicationService, AdoptionApplicationService>();
 
 
 

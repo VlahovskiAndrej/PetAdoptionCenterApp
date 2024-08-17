@@ -15,5 +15,6 @@ namespace PetAdoptionCenter.Service.Interface
         public Pet CreateNewPet(string loggedInUser, Pet pet);
         public Pet UpdatePet(Pet pet);
         public Pet DeletePet(Guid id);
+
     }
 }
