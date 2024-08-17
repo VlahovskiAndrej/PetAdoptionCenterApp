@@ -13,12 +13,7 @@ namespace repository
             : base(options)
         {
         }
-        public DbSet<Product> Product { get; set; } = default!;
-        public DbSet<ShoppingCart> ShoppingCart { get; set; } = default!;
-        public DbSet<ProductInShoppingCart> ProductInShoppingCart { get; set; } = default!;
-        public DbSet<Order> Order { get; set; } = default!;
-        public DbSet<ProductInOrder> ProductInOrder { get; set; } = default!;
-        public DbSet<Probaa> Probaa { get; set; } = default!;
+      
         public DbSet<Pet> Pet { get; set; } = default!;
         public DbSet<AdoptionApplication> AdoptionApplication { get; set; } = default!;
 

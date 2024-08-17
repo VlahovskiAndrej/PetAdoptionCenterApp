@@ -140,7 +140,7 @@ namespace Aud8.Areas.Identity.Pages.Account
                 user.LastName = Input.LastName;
                 user.Address = Input.Address;
                 //ShoppingCart shoppingCart = new ShoppingCart();
-                user.UserCart = new ShoppingCart();
+                
                 /*user.Role = Input.Role;*/
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var roleResult = await _userManager.AddToRoleAsync(user, Input.Role);

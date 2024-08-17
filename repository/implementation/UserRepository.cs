@@ -29,9 +29,6 @@ namespace repository.implementation
         {
             var strGuid = id.ToString();
             return entities
-                .Include(z => z.UserCart)
-                .Include(z => z.UserCart.ProductInShoppingCarts)
-                .Include("UserCart.ProductInShoppingCarts.Product")
                 .First(s => s.Id == strGuid);
         }
         public void Insert(PetAdoptionCenterUser entity)
