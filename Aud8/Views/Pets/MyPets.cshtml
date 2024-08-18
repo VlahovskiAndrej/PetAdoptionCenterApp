@@ -1,11 +1,13 @@
-﻿@model IEnumerable<PetAdoptionCenter.Domain.Models.Pet>
+﻿@using System.Security.Claims
+@model IEnumerable<PetAdoptionCenter.Domain.Models.Pet>
 
 
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="ExportAllPetsByShelter" asp-route-id="@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="btn btn-secondary">Export Pets</a>
 </p>
 <table class="table">
     <thead>
