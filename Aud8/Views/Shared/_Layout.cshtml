@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/Aud8.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header style="margin-bottom: 0;">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pet Adoption Center</a>
@@ -22,9 +22,9 @@
                         @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li> *@
-                        <li class="nav-item">
+                        @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="Index">Pets</a>
-                        </li>
+                        </li> *@
                         @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="AdoptionApplications" asp-action="Index">Applications</a>
                         </li> *@
@@ -34,8 +34,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>

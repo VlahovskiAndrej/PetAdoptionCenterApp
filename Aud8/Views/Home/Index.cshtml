@@ -2,7 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+
+@* stilot e namesten za da bide tekstot nad slikata, samo treba da se izbere soodvetna slika. *@
+<div>
+    @* <img style="margin-left: 0;" width="1518px" height="800px" display: block;" src="https://c8.alamy.com/comp/2G66897/man-with-dog-flat-vector-illustration-morning-stroll-summertime-city-recreation-leisure-in-park-guy-walking-pet-character-in-cartoon-style-young-2G66897.jpg" alt="Alternate Text" /> *@
+    <div style="position: absolute; top: 10%; left: 50%; transform: translateX(-50%);">
+        <h2 style="margin-bottom: 0; font-size: 45px;" class="fw-bold">Preparing your home</h2>
+        <h1 style="margin-top: 0; font-size: 55px;" class="fw-bold text-danger">For your buddy</h1>
+        <p style="width: 60%; margin: 30px 0; font-size: 15px;">
+            Adopting a pet is a rewarding experience that brings joy and companionship into your life. 
+            By choosing to adopt, you give a loving home to an animal in need, offering them a second
+            chance at happiness. 
+        </p>
+        <button class="btn btn-danger" style="border-radius: 25px; padding: 10px 35px;">Learn more</button>
+    </div>
 </div>

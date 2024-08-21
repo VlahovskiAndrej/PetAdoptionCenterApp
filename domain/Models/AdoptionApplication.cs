@@ -26,9 +26,5 @@ namespace PetAdoptionCenter.Domain.Models
         public string? Question8 { get; set; }
         public string? Question9 { get; set; }
         public string? Question10 { get; set; }
-
-
-
-
     }
 }
