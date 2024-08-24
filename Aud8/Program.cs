@@ -2,6 +2,7 @@
 using domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PetAdoptionCenter.Domain.DomainEntities;
 using PetAdoptionCenter.Repository.implementation;
 using PetAdoptionCenter.Repository.Interface;
 using PetAdoptionCenter.Service.implementation;
@@ -27,7 +28,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IPetRepository), typeof(PetRepository));
 builder.Services.AddScoped(typeof(IAdoptionApplicationRepository), typeof(AdoptionApplicationRepository));
-
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 builder.Services.AddTransient<IPetService, PetService>();
 builder.Services.AddTransient<IAdoptionApplicationService, AdoptionApplicationService>();
 
