@@ -143,6 +143,15 @@ namespace Aud8.Areas.Identity.Pages.Account
                 
                 /*user.Role = Input.Role;*/
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    await OnGetAsync(returnUrl);
+                    return Page();
+                }
                 var roleResult = await _userManager.AddToRoleAsync(user, Input.Role);
 
                 if (result.Succeeded && roleResult.Succeeded)

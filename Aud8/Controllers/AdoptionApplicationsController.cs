@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using PetAdoptionCenter.Domain.Models;
 using PetAdoptionCenter.Service.Interface;
 using repository;
 using repository.Interface;
+using Stripe;
 
 namespace PetAdoptionCenter.Web.Controllers
 {
@@ -132,7 +134,44 @@ namespace PetAdoptionCenter.Web.Controllers
             return RedirectToAction("Applications", new {petId = appForm.PetId});
         }
 
+        public IActionResult PayOrder(string stripeEmail, string stripeToken, Guid? id)
+        {
+            var customerService = new CustomerService();
+            var chargeService = new ChargeService();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "N/A";
+            StripeConfiguration.ApiKey = "sk_test_51PrNaG06QKoQYSRpbAOKdi8nkp01VMSCSenn1adeU6EhfSpBkoD3GUOgqrnBsEHeoeDvHzDOUHRcbMTULJE29ApB008c9rfxBc";
+            var appForm = _adoptionApplicationService.GetAdoptionApplicationById(id);
 
+            var customer = customerService.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Source = stripeToken
+            });
+
+            var charge = chargeService.Create(new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt32(appForm.Pet.Price) * 100,
+                Description = "EShop Application Payment",
+                Currency = "eur",
+                Customer = customer.Id
+            });
+
+            if (charge.Status == "succeeded")
+            {
+                var result = this.Pay(id);
+                return RedirectToAction("MyApplications", new { id = appForm.AdopterId });
+            }
+
+            return RedirectToAction("MyApplications", new { id = appForm.AdopterId });
+        }
+
+
+        public bool Pay(Guid? id)
+        {
+            var appForm = _adoptionApplicationService.GetAdoptionApplicationById(id);
+            _adoptionApplicationService.PayForAdoption(id);
+            return true;
+        }
 
 
 

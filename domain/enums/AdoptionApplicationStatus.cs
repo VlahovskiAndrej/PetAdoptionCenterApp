@@ -10,6 +10,7 @@ namespace PetAdoptionCenter.Domain.enums
     {
         PENDING,
         REJECTED,
-        APPROVED
+        APPROVED,
+        PENDING_FOR_PAYEMENT
     }
 }
