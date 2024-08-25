@@ -2,101 +2,76 @@
 @model IEnumerable<PetAdoptionCenter.Domain.Models.AdoptionApplication>
 
 
-<table class="table">
+<table class="table table-striped table-bordered" style="width: 90%; margin-left: 5%;">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AdoptionApplicationStatus)
+            <th class="text-center" width="17%">
+                Adoption Status
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Adopter)
+            <th class="text-center">
+                Adopter email
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pet)
+            <th class="text-center">
+                Pet @Html.DisplayNameFor(model => model.Pet.Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question1)
+            <th class="text-center">
+                Pet Breed
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question2)
+            <th class="text-center">
+                Pet Age
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question4)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question5)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question6)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question7)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question8)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question9)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question10)
-            </th>
-            <th></th>
+            <th width="12%"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AdoptionApplicationStatus)
+                <td class="text-center d-flex justify-content-center" style="padding: 15px 0">
+                    @if (item.AdoptionApplicationStatus == PetAdoptionCenter.Domain.enums.AdoptionApplicationStatus.APPROVED)
+                    {
+                        <span style="width:fit-content; border-radius: 10px; padding: 0px 9px;" class="bg-success text-white d-flex">@item.AdoptionApplicationStatus</span>
+                    }
+                    else if (item.AdoptionApplicationStatus == PetAdoptionCenter.Domain.enums.AdoptionApplicationStatus.PENDING_FOR_PAYEMENT)
+                    {
+                        <span style="width:fit-content;border-radius: 10px; padding: 0px 9px;" class="bg-primary text-white d-flex">@item.AdoptionApplicationStatus</span>
+                    }
+                    else
+                    {
+                        <span style="width:fit-content;border-radius: 10px; padding: 0px 9px;" class="bg-warning text-white d-flex">@item.AdoptionApplicationStatus</span>
+                    }
+
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Adopter.Id)
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Adopter.UserName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pet.Id)
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Pet.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question1)
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Pet.PetType)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question2)
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Pet.Age) years old
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question3)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question4)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question5)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question6)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question7)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question8)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question9)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question10)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+
+                <td class="text-center">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-light me-2" style="border: 1px solid gray;">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </a>
                     @if (item.Pet.PetStatus == PetStatus.ADOPTED)
                     {
-                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success disabled">Accept</a>
+                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success disabled">
+                            Accept
+                            <i class="bi bi-check-circle"></i>
+                        </a>
                     }else{
-                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success">Accept</a>
+                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success">Accept
+                            <i class="bi bi-check-circle"></i>
+                        </a>
                     }
                     
                 </td>
