@@ -35,7 +35,7 @@ namespace PetAdoptionCenter.Web.Controllers
         }
 
         // GET: Pets
-        [Authorize(Roles = "Shelter,Adopter")]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             

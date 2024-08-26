@@ -16,8 +16,13 @@
             chance at happiness. 
         </p>
 
-        <button onclick="window.location.href='http://localhost:5195/pets';" class="btn btn-warning" style="border-radius: 25px; padding: 10px 35px; font-size: 19px;">Learn more</button>
-        <button onclick="window.location.href='http://localhost:5195/Identity/Account/Login';" class="btn btn-outline-success ms-3" style="border-radius: 25px; padding: 10px 35px; font-size: 19px;">Create an account</button>
+        <a asp-controller="Pets" asp-action="Index" class="btn btn-warning" style="border-radius: 25px; padding: 10px 35px; font-size: 19px;">Learn more</a>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+           <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-success ms-3" style="border-radius: 25px; padding: 10px 35px; font-size: 19px;">Create an account</a>
+        }
+        
     </div>
     <img style="margin: 0;" width="700px" src="https://img.freepik.com/free-vector/adopt-pet-concept_23-2148523582.jpg?t=st=1724537746~exp=1724541346~hmac=5a42abf3533cade1f4a5fe6bfc56d30968ed8fdbcf588b9a860582adf0be0737&w=900" alt="Alternate Text" />
 
