@@ -19,10 +19,10 @@
             <div class="">
                 <!-- Pet Details -->
                 <dl class="row">
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-7" style="font-size: 1.5rem;">
                         @Html.DisplayFor(model => model.Name)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-5 d-flex justify-content-end" style="font-size: 1.25rem;">
                         @if (Model.PetStatus == PetAdoptionCenter.Domain.enums.PetStatus.ADOPTED)
                         {
                             <div class="status-label" style=" background-color: red; color: white; padding: 5px 10px; border-radius: 5px; width: fit-content">
@@ -39,52 +39,52 @@
                         }
                     </dd>
                     <hr />
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.Age)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.Age)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.PetType)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.PetType)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.Breed)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.Breed)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.Sex)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.Sex)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.IsHouseTrained)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.IsHouseTrained)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.FavouriteThings)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.FavouriteThings)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.HomeRequirements)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.HomeRequirements)
                     </dd>
-                    <dt class="col-sm-3" style="font-size: 1.25rem;">
+                    <dt class="col-sm-5" style="font-size: 1.25rem;">
                         @Html.DisplayNameFor(model => model.Shelter)
                     </dt>
-                    <dd class="col-sm-9" style="font-size: 1.25rem;">
+                    <dd class="col-sm-7" style="font-size: 1.25rem;">
                         @Html.DisplayFor(model => model.Shelter.FirstName)
                     </dd>
                 </dl>

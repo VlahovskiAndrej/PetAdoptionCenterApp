@@ -23,7 +23,7 @@ namespace PetAdoptionCenter.Domain.Models
         public string? PhotoUrl { get; set; }
         public PetStatus? PetStatus { get; set; }
         public string? ShelterId { get; set; }
-        public int Price { get; set; } = 20;
+        public int Price { get; set; }
         public PetAdoptionCenterUser? Shelter {  get; set; }
 
     }

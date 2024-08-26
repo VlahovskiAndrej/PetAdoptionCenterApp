@@ -95,7 +95,7 @@ namespace PetAdoptionCenter.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,Age,PetType,Breed,Sex,Description,IsHouseTrained,FavouriteThings,HomeRequirements,PhotoUrl,Id")] Pet pet)
+        public IActionResult Create([Bind("Name,Age,PetType,Breed,Sex,Description,IsHouseTrained,FavouriteThings,HomeRequirements,Price,PhotoUrl,Id")] Pet pet)
         {
             if (ModelState.IsValid)
             {
@@ -132,7 +132,7 @@ namespace PetAdoptionCenter.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, [Bind("Name,Age,PetType,Breed,Sex,Description,IsHouseTrained,FavouriteThings,HomeRequirements,PhotoUrl,PetStatus,ShelterId,Id")] Pet pet)
+        public IActionResult Edit(Guid id, [Bind("Name,Age,PetType,Breed,Sex,Description,IsHouseTrained,FavouriteThings,HomeRequirements,Price,PhotoUrl,PetStatus,ShelterId,Id")] Pet pet)
         {
             if (id != pet.Id)
             {
