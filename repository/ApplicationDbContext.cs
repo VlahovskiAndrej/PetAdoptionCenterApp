@@ -23,8 +23,21 @@ namespace repository
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PetAdoptionCenter-7bb318c5-dd1c-4371-80d7-43ccb19c121b;Trusted_Connection=True;MultipleActiveResultSets=true", b => b.MigrationsAssembly("PetAdoptionCenter.Web"));
+                optionsBuilder.UseSqlServer(
+                    "Server=tcp:pacsqlserver.database.windows.net,1433;Initial Catalog=PetAdoptionCenterAppDb;Persist Security Info=False;User ID=pacadmin;Password=Admin123-;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+                    sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly("PetAdoptionCenter.Web");
+
+                        // Enabling retry on transient failures
+                        sqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 5, // Optional: Customize the number of retry attempts
+                            maxRetryDelay: TimeSpan.FromSeconds(30), // Optional: Customize the delay between retries
+                            errorNumbersToAdd: null // Optional: Specify additional SQL error numbers to retry on
+                        );
+                    });
             }
+
         }
 
     }
