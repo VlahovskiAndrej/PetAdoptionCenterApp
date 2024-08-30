@@ -14,7 +14,7 @@ namespace PetAdoptionCenter.Repository
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PetAdoptionCenter-7bb318c5-dd1c-4371-80d7-43ccb19c121b;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=tcp:pacsqlserver.database.windows.net,1433;Initial Catalog=PetAdoptionCenterAppDb;Persist Security Info=False;User ID=pacadmin;Password=Admin123-;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
