@@ -3,6 +3,7 @@ using domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PetAdoptionCenter.Domain.Models;
+using PetAdoptionCenter.Domain.OtherModels;
 using System.Collections.Generic;
 
 namespace repository
@@ -16,6 +17,8 @@ namespace repository
       
         public DbSet<Pet> Pet { get; set; } = default!;
         public DbSet<AdoptionApplication> AdoptionApplication { get; set; } = default!;
+        public DbSet<Agency> Agencies { get; set; } = default!;
+        public DbSet<TravelPackage> TravelPackages { get; set; } = default!;
 
 
 
@@ -24,7 +27,7 @@ namespace repository
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    "Server=tcp:pacsqlserver.database.windows.net,1433;Initial Catalog=PetAdoptionCenterAppDb;Persist Security Info=False;User ID=pacadmin;Password=Admin123-;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+                   "Server=SAKICASA\\SQLEXPRESS;Database=PAC;Trusted_Connection=True;TrustServerCertificate=True;",
                     sqlServerOptionsAction: sqlOptions =>
                     {
                         sqlOptions.MigrationsAssembly("PetAdoptionCenter.Web");
